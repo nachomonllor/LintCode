@@ -1,0 +1,31 @@
+﻿ public static List<Long> productExcludeItself(List<Integer> nums) {
+        
+        
+            List<Long> ans = new ArrayList ();
+
+            // write your code here
+            Long[] izquierda = new Long[nums.size()];
+            izquierda[0] = nums.get(0).longValue();
+            Long[] derecha = new Long[nums.size()];
+            derecha[nums.size() - 1] = nums.get(nums.size() - 1).longValue();
+
+            int k = 1;
+            for (int i = nums.size() - 2; i >= 0; i--)
+            {
+                izquierda[k] = izquierda[k - 1] * nums.get(k);
+                derecha[i] = derecha[i + 1] * nums.get(i);
+                k++;
+            }
+
+            for (int i = 0; i < nums.size(); i++)
+            {
+                Long prod = 1L;
+                if (i - 1 >= 0) prod *= izquierda[i - 1];
+                if (i + 1 < nums.size()) prod *= derecha[i + 1];
+                ans.add(prod);
+            }
+
+            return ans ;
+        
+    }
+    
