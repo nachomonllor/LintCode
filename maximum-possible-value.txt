@@ -1,0 +1,22 @@
+  
+
+https://www.lintcode.com/problem/maximum-possible-value/description
+
+  """
+    def MaximumPossibleValue(self, N):
+        # write your code here
+        maximo = int(str(N) + '5')
+        if N >= 0:
+    
+            s = str(N)
+            for i in range(len(s)) :
+                con_5 = s[:i] + '5' + s[i:]
+                maximo = max(int(con_5), maximo)
+        else:
+            s = str(N)
+            for i in range(1, len(s)) :
+                con_5 = s[:i] + '5' + s[i:]
+                maximo = max(int(con_5), maximo)
+    
+    
+        return maximo 

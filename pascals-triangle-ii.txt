@@ -1,0 +1,47 @@
+https://www.lintcode.com/problem/pascals-triangle-ii/description 
+
+vector<int> getRow(int rowIndex) {
+        // write your code here
+        vector<vector<int >> m;
+        vector<int> fila(rowIndex + 1, 0);
+        for (int i = 0; i < rowIndex + 1; i++) {
+            m.push_back(fila);
+        }
+    
+        for (int i = 0; i < rowIndex + 1; i++) {
+            m[i][0] = 1;
+            m[0][i] = 1;
+        }
+    
+    
+        for (int i = 1; i < rowIndex + 1; i++) {
+            for (int j = 1; j < rowIndex + 1; j++) {
+                m[i][j] = m[i - 1][j] + m[i][j - 1];
+            }
+        }
+    
+        
+        /*
+        for (int i = 0; i < rowIndex + 1; i++) {
+    
+            for (int j = 0; j < rowIndex + 1; j++) {
+                cout << m[i][j] << " ";
+            }
+            cout << endl;
+        }*/
+    
+        int i = rowIndex;
+        int j = 0;
+    
+        vector<int> x;
+        while (i >= 0 && j <= rowIndex) {
+            x.push_back(m[i][j]);
+            i--;
+            j++;
+                
+        }
+        
+    
+    
+        return x;
+    }

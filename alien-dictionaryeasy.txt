@@ -1,0 +1,39 @@
+
+
+https://www.lintcode.com/problem/alien-dictionaryeasy/description
+
+class Solution:
+    """
+    @param words: 
+    @param order: 
+    @return: nothing
+    """
+    def compara(self, a, b, orden):
+        indices = {}
+        for i in range(0, len(orden)):
+            indices[orden[i]] = i 
+
+        i =0
+        j =0
+
+        while i < len(a) and j < len(b):
+            if indices[b[j]] < indices[a[i]]:
+                return b 
+            elif indices[a[i] ] < indices[b[j]]:
+                return a 
+            i+=1
+            j+=1
+
+        if len(a) > len(b):
+            return b
+        return a 
+
+
+    def isAlienSorted(self, words, order):
+
+        for i in range(0, len(words) - 1):
+            izq = self.compara(words[i], words[i+1], order)
+
+            if izq == words[i+1] and izq != words[i]:
+                return False
+        return True

@@ -1,0 +1,30 @@
+https://www.lintcode.com/problem/product-of-array-exclude-itself/description  
+
+vector<long long> productExcludeItself(vector<int> &nums) {
+        // write your code here
+        vector<long long> izq(0, nums.size());
+        vector<long long> der(0, nums.size());
+    
+        long long prod = 1;
+        for (int i = 0; i < nums.size(); i++) {
+           
+            izq.push_back(prod);
+            prod *= nums[i];
+        }
+    
+        prod = 1;
+    
+        for (int i = nums.size() - 1; i >= 0; i--) {
+           
+            der.insert(der.begin(),  prod);
+            prod *= nums[i];
+        }
+    
+        vector<long long> v;
+    
+        for (int i = 0; i < nums.size(); i++) {
+            v.push_back(izq[i] * der[i]);
+        }
+    
+        return v;
+    }

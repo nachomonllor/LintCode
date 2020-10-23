@@ -1,0 +1,72 @@
+   https://www.lintcode.com/problem/k-diff-pairs-in-an-array/description
+
+ def findPairs(self, nums, k):
+        # Write your code here
+        dic = {}
+
+        for item in nums:
+            if item in dic:
+                dic[item] += 1
+            else:
+                dic[item] = 1
+    
+        hash = set()
+        for i in range(0, len(nums)):
+            dic[nums[i]] -= 1
+            if (nums[i] + k  ) in dic and dic[nums[i] + k] > 0:
+                #print(nums[i], nums[i] + k)
+                hash.add(str(nums[i]) + " " +str(nums[i] + k))
+                dic[nums[i] + k] -= 1 
+                #dic[nums[i]] -= 1
+            if (nums[i] - k) in dic and dic[nums[i] - k] > 0: 
+                hash.add( str(nums[i] - k) + " " + str( nums[i]))
+                #print(nums[i] - k, nums[i])
+                dic[nums[i] - k] -= 1 
+                #dic[nums[i]] -= 1
+    
+        return len(hash )
+
+
+--------------------------------------------------
+
+#include <map>
+#include <set>
+#include <string> 
+
+
+using namespace std;
+
+
+int findPairs(vector<int>& nums, int k) {
+    
+    map<int, int> dic;
+
+    for (int i = 0; i < nums.size(); i++) {
+        dic[nums[i]]++;
+    }
+
+    set<string> hash;
+
+    for (int i = 0; i < nums.size(); i++) {
+        dic[nums[i]]--;
+        if (dic.find(nums[i] + k ) != dic.end() && dic[nums[i] + k] > 0) {
+            hash.insert(std::to_string(nums[i])  + " " +  std::to_string(nums[i] + k));
+            dic[nums[i] + k]--;
+        }
+        if (dic.find(nums[i] - k) != dic.end() && dic[nums[i] - k] > 0) {
+            hash.insert(std::to_string(nums[i] - k) + " " + std::to_string(nums[i]));
+            dic[nums[i] - k]--;
+        }
+    }
+
+    return hash.size();
+
+
+}
+
+
+
+int main()
+{
+    std::cout << "Hello World!\n";
+}

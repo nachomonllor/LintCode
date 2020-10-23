@@ -1,0 +1,37 @@
+https://www.lintcode.com/problem/top-k-frequently-mentioned-keywords/description
+
+import re
+class Solution:
+    """
+    @param K: a integer
+    @param keywords: a list of string
+    @param reviews: a list of string
+    @return: return the top k keywords list
+    """
+    def TopkKeywords(self, K, keywords, reviews):
+        # write your code here
+        dic = {}
+
+        hash_keys = set(keywords)
+    
+        for item in reviews:
+            palabras = re.split('[, ]', item.lower())
+          
+            hash = set(palabras)
+    
+            for k in hash_keys:
+                if k in hash:
+                    if k in dic:
+                        dic[k] += 1 
+                    else:
+                        dic[k] = 1 
+        
+        ans = []
+        cont = 0 
+    
+        for k, v in sorted(dic.items(),key=lambda x:(-x[1],x[0])):
+            ans.append(k)
+            cont += 1
+            if cont >= K:
+                break 
+        return ans 
