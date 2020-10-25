@@ -1,0 +1,97 @@
+
+
+https://www.lintcode.com/problem/reorder-array-to-construct-the-minimum-number/description
+
+def minNumber( nums):
+
+
+    for i in range(0, len(nums)):
+
+        for j in range(i+1, len(nums)):
+            a = int(str(nums[i])+str(nums[j]))
+            b = int (str(nums[j])+str(nums[i]))
+            
+            if a > b:
+                temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp 
+    #print(nums)
+    #return ''.join(nums)
+    a = map(str, nums)    
+    a = ''.join(a)
+    k = 0
+    for k in range(len(a)):
+        if a[k] != '0':
+            break
+    return a[k:]
+
+input = [0,1]
+#input = [3, 32, 321] #321323
+
+print(minNumber(input))
+
+
+--------------------------CON QUICKSORT----------------------
+
+
+class Solution:
+    """
+    @param nums: n non-negative integer array
+    @return: A string
+    """
+    def partition(self, arr, low, high):
+        i = (low-1)         # index of smaller element
+        pivot = arr[high]     # pivot
+     
+        for j in range(low, high):
+     
+    
+            a = int(str(pivot)+str(arr[j]))
+            b = int (str(arr[j])+str(pivot))
+    
+            # If current element is smaller than or
+            # equal to pivot
+            #if arr[j] <= pivot:
+            if a > b:
+     
+                # increment index of smaller element
+                i = i + 1
+                arr[i], arr[j] = arr[j], arr[i]
+     
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        return (i+1)
+     
+    # The main function that implements QuickSort
+    # arr[] --> Array to be sorted,
+    # low  --> Starting index,
+    # high  --> Ending index
+    # Function to do Quick sort
+     
+     
+    def quickSort(self,arr, low, high):
+        if len(arr) == 1:
+            return arr
+        if low < high:
+     
+            # pi is partitioning index, arr[p] is now
+            # at right place
+            pi = self.partition(arr, low, high)
+     
+            # Separately sort elements before
+            # partition and after partition
+            self.quickSort(arr, low, pi-1)
+            self.quickSort(arr, pi+1, high)
+    
+    
+    def minNumber(self,  nums):
+    
+    
+        self.quickSort(nums, 0, len(nums) - 1)
+    
+        a = map(str, nums)    
+        a = ''.join(a)
+        k = 0
+        for k in range(len(a)):
+            if a[k] != '0':
+                break
+        return a[k:]

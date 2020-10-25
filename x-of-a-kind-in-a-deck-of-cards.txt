@@ -1,0 +1,27 @@
+   
+https://www.lintcode.com/problem/x-of-a-kind-in-a-deck-of-cards/description
+
+ bool hasGroupsSizeX(vector<int> &deck) {
+        // write your code here
+        
+        
+        int max = 0;
+        for (int i = 0; i < deck.size(); i++) {
+            
+            max = std::max(max, deck[i]);
+        }
+    
+        vector<int> hash(max + 1, 0);
+    
+        for (int i = 0; i < deck.size(); i++) {
+            hash[deck[i]]++;
+        }
+    
+        for (int i = 0; i < max + 1; i++) {
+            if (hash[i] > 0 && (hash[i] < 2 || hash[i] % 2 != 0)) {
+                return false;
+            }
+        }
+    
+        return true;
+    }

@@ -1,0 +1,25 @@
+ 
+https://www.lintcode.com/problem/replace-with-greatest-from-right/description
+
+
+  void arrayReplaceWithGreatestFromRight(vector<int> &nums) {
+        // Write your code here.
+         vector<int> ans;
+
+        ans.push_back(-1);
+       
+        int max = INT_MIN;
+        for (int i = nums.size() - 1; i > 0; i--) {
+            max = std::max(max, nums[i]);
+    
+            ans.insert(ans.begin(), max);
+        }
+    
+       /*
+        for (int i = 0; i < ans.size(); i++) {
+            cout << ans[i] << " ";
+        }*/
+    
+        nums = ans;
+        
+    }

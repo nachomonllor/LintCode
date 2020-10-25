@@ -1,0 +1,28 @@
+https://www.lintcode.com/problem/matching-subsequences/description
+
+class Solution:
+    """
+    @param source: A string
+    @param words: A list of string
+    @return: return list of words[i] that is a subsequence of source.
+    """
+    def isSubsequence(self, s, t):
+        if len(s) == 0:
+            return True
+    
+        j = 0
+        for i in range(len(t)):
+            if s[j] == t[i]:
+                j += 1
+            if j == len(s):
+                return True 
+        return False
+    
+    
+    def MatchingSubsequences(self, source, words):
+        # write your code here
+        ans = []
+        for i in range(len(words)):
+            if self.isSubsequence(words[i], source):
+                ans.append(words[i])
+        return ans 

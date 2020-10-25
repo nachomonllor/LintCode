@@ -1,0 +1,91 @@
+ 
+https://www.lintcode.com/problem/3sum/description
+ vector<vector<int>> threeSum(vector<int> &numbers) {
+        // write your code here
+        
+         map<int, int> dic;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            dic[numbers[i]]++;
+        }
+
+
+        set<string> hash;
+        vector< vector <int > > ans;
+
+        if (dic.find(0) != dic.end()) {
+            if (dic[0] >= 3) {
+                ans.push_back(vector<int>({0,0,0}));
+            }
+        }
+
+        vector<int> unicos;
+        for (map<int, int>::iterator it = dic.begin(); it != dic.end(); it++) {
+            unicos.push_back(it->first);
+        }
+
+
+        for (int i = 0; i < unicos.size() ; i++) {
+            for (int j = i + 1; j < unicos.size(); j++) {
+
+
+                int a = unicos[i];
+                int b = unicos[j];
+                int c = -(unicos[i] + unicos[j]);
+
+                if (a == 0 && b == 0 && c == 0) {
+                    continue;
+                }
+
+
+                if (dic.find(c) != dic.end()) {
+
+
+                    if (a == b) {
+                        if (dic[a] < 2) {
+                            continue;
+                        }
+                    }
+
+                    if (a == c) {
+                        if (dic[a] < 2) {
+                            continue;
+                        }
+                    }
+
+                    if (b == c) {
+                        if (dic[b] < 2) {
+                            continue;
+                        }
+                    }
+
+
+                    vector<int> triplete;
+                    triplete.push_back(a);
+                    triplete.push_back(b);
+                    triplete.push_back(c);
+
+
+                    std::sort(triplete.begin(), triplete.end());
+
+                    string aux = std::to_string( triplete[0]) + " " + std::to_string( triplete[1]) + " " + std::to_string( triplete[2]);
+
+                    if (hash.find(aux) == hash.end()) {
+
+                        if (aux == "0 0 0") {
+                            if (dic[0] < 3) {
+                                continue;
+                            }
+                        }
+
+                        ans.push_back(triplete);
+                        hash.insert(aux);
+                    }
+                }
+            }
+        }
+
+
+        return ans;
+        
+    }

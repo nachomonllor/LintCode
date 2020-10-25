@@ -1,0 +1,30 @@
+ https://www.lintcode.com/problem/shortest-word-distance/description
+
+ int shortestDistance(vector<string> &words, string &word1, string &word2) {
+        // Write your code here
+        vector<int> indices_1;
+        vector<int> indices_2;
+    
+    
+        for (int i = 0; i < words.size(); i++) {
+            if (words[i] == word1) {
+                indices_1.push_back(i);
+            }
+            if (words[i] == word2) {
+                indices_2.push_back(i);
+            }
+        }
+    
+        int dif = words.size();
+        int min_dif = dif;
+        for (int i = 0; i < indices_1.size(); i++) {
+            for (int j = 0; j < indices_2.size(); j++) {
+                if (std::abs(indices_1[i] - indices_2[j]) < dif) {
+                    dif = std::abs(indices_1[i] - indices_2[j]) ;
+    
+                }
+            }
+        }
+    
+        return dif;
+    }
